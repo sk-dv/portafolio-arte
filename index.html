@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio · Arte & Cultura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f1ea;
+    --ink:#1a1714;
+    --muted:#6b6258;
+    --line:#d8d0c2;
+    --accent:#8a2b2b;
+    --paper:#fbf9f4;
+    --shadow:rgba(26,23,20,0.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;
+    font-size:18px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:radial-gradient(var(--line) 0.5px, transparent 0.5px);
+    background-size:22px 22px;
+    opacity:0.25;
+    pointer-events:none;z-index:0;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  header{padding:96px 0 56px;text-align:center}
+  .eyebrow{
+    font-family:"Fraunces",serif;
+    text-transform:uppercase;
+    letter-spacing:0.42em;
+    font-size:0.72rem;
+    font-weight:600;
+    color:var(--accent);
+    margin-bottom:22px;
+  }
+  header h1{
+    font-family:"Fraunces",serif;
+    font-weight:340;
+    font-size:clamp(2.6rem,8vw,5rem);
+    line-height:1.02;
+    letter-spacing:-0.02em;
+  }
+  header h1 em{font-style:italic;color:var(--accent)}
+  .lede{
+    max-width:540px;margin:26px auto 0;
+    color:var(--muted);font-size:1.15rem;
+  }
+  .meta{
+    margin-top:34px;font-family:"Fraunces",serif;
+    font-size:0.8rem;letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  nav{
+    position:sticky;top:0;z-index:5;
+    background:rgba(244,241,234,0.82);
+    backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    margin-bottom:64px;
+  }
+  nav ul{
+    list-style:none;display:flex;justify-content:center;flex-wrap:wrap;
+    gap:8px 26px;padding:16px 0;max-width:880px;margin:0 auto;
+  }
+  nav a{
+    font-family:"Fraunces",serif;font-size:0.82rem;
+    letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;
+    padding-bottom:3px;border-bottom:1.5px solid transparent;
+    transition:color .25s,border-color .25s;
+  }
+  nav a:hover{color:var(--accent);border-color:var(--accent)}
+
+  .unit{margin-bottom:30px}
+  .unit-label{
+    font-family:"Fraunces",serif;font-style:italic;
+    font-size:clamp(1.4rem,4vw,2rem);color:var(--accent);
+    margin-bottom:4px;
+  }
+  .unit-sub{color:var(--muted);font-size:1rem}
+  .unit-divider{
+    display:flex;align-items:center;gap:18px;margin:0 0 40px;
+  }
+  .unit-divider .ln{flex:1;height:1px;background:var(--line)}
+
+  section{margin-bottom:64px;scroll-margin-top:90px}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:26px}
+  .sec-num{
+    font-family:"Fraunces",serif;font-size:0.85rem;
+    color:var(--accent);font-weight:600;letter-spacing:0.1em;
+  }
+  .sec-head h2{
+    font-family:"Fraunces",serif;font-weight:380;
+    font-size:clamp(1.6rem,4.2vw,2.3rem);letter-spacing:-0.01em;
+    line-height:1.1;
+  }
+  .sec-line{flex:1;height:1px;background:var(--line);transform:translateY(-6px)}
+
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:32px 36px;
+    margin-bottom:20px;
+    box-shadow:0 1px 0 var(--shadow);
+    transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px var(--shadow)}
+  .card h3{
+    font-family:"Fraunces",serif;font-weight:440;
+    font-size:1.4rem;letter-spacing:-0.01em;margin-bottom:6px;
+  }
+  .card .tag{
+    font-family:"Fraunces",serif;font-size:0.68rem;
+    text-transform:uppercase;letter-spacing:0.2em;color:var(--accent);
+    display:block;margin-bottom:14px;
+  }
+  .card p{color:var(--ink);margin-bottom:14px}
+  .card ul{margin:0 0 16px 20px;color:var(--muted)}
+  .card ul li{margin-bottom:5px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:"Fraunces",serif;font-size:0.82rem;letter-spacing:0.05em;
+    text-transform:uppercase;text-decoration:none;
+    color:var(--ink);border:1px solid var(--ink);
+    padding:9px 18px;border-radius:2px;
+    transition:background .25s,color .25s;
+  }
+  .btn:hover{background:var(--ink);color:var(--bg)}
+  .btn span{transition:transform .25s}
+  .btn:hover span{transform:translateX(3px)}
+
+  blockquote{
+    border-left:2px solid var(--accent);
+    padding-left:18px;margin:16px 0;color:var(--muted);font-style:italic;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:48px 0 70px;text-align:center;color:var(--muted);
+    font-size:0.92rem;
+  }
+  footer .sig{
+    font-family:"Fraunces",serif;font-style:italic;
+    font-size:1.3rem;color:var(--ink);margin-bottom:8px;
+  }
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---- Sección especial: presentación (azul medianoche + dorado) ---- */
+  .feature{
+    --midnight:#1A1A2E;
+    --deep-blue:#16213E;
+    --gold:#C9A84C;
+    --soft:#E8E6E1;
+    --soft-muted:#A0A0B0;
+    background:linear-gradient(160deg,var(--midnight),var(--deep-blue));
+    color:var(--soft);
+    border-radius:4px;
+    padding:48px 44px;
+    margin-bottom:20px;
+    position:relative;overflow:hidden;
+    box-shadow:0 20px 50px rgba(15,15,26,0.35);
+  }
+  .feature::after{
+    content:"";position:absolute;top:-40%;right:-10%;
+    width:380px;height:380px;border-radius:50%;
+    background:radial-gradient(circle,rgba(201,168,76,0.18),transparent 70%);
+    pointer-events:none;
+  }
+  .feature .tag{
+    font-family:"Fraunces",serif;font-size:0.68rem;
+    text-transform:uppercase;letter-spacing:0.22em;color:var(--gold);
+    display:block;margin-bottom:14px;position:relative;
+  }
+  .feature h3{
+    font-family:"Fraunces",serif;font-weight:400;font-style:italic;
+    font-size:2rem;letter-spacing:-0.01em;margin-bottom:4px;color:var(--soft);position:relative;
+  }
+  .feature .feature-sub{color:var(--soft-muted);font-style:italic;margin-bottom:22px;position:relative}
+  .feature .gold-line{width:48px;height:2px;background:var(--gold);margin-bottom:22px;position:relative}
+  .feature p{color:var(--soft);margin-bottom:14px;max-width:660px;position:relative}
+  .feature .pills{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 26px;position:relative}
+  .feature .pill{
+    font-family:"Fraunces",serif;font-size:0.72rem;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--gold);
+    border:1px solid rgba(201,168,76,0.4);border-radius:30px;
+    padding:6px 14px;
+  }
+  .feature .btn-gold{
+    display:inline-flex;align-items:center;gap:8px;position:relative;
+    font-family:"Fraunces",serif;font-size:0.82rem;letter-spacing:0.05em;
+    text-transform:uppercase;text-decoration:none;
+    color:var(--midnight);background:var(--gold);
+    padding:11px 22px;border-radius:2px;
+    transition:transform .25s,box-shadow .25s;
+  }
+  .feature .btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(201,168,76,0.3)}
+  .feature .btn-gold span{transition:transform .25s}
+  .feature .btn-gold:hover span{transform:translateX(3px)}
+  .unit-label.gold{color:#C9A84C}
+
+  @media(max-width:560px){
+    body{font-size:17px}
+    .card{padding:26px 22px}
+    header{padding:64px 0 40px}
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="eyebrow reveal">Portafolio de la materia</div>
+  <h1 class="reveal">Arte &amp;<br><em>Cultura</em></h1>
+  <p class="lede reveal">Recorrido por los conceptos del curso: de qué es la cultura y lo estético, a cómo leemos las imágenes, los relatos y los lenguajes de cada arte.</p>
+  <div class="meta reveal">Unidades I &amp; II — 2026</div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#u1">Unidad I</a></li>
+    <li><a href="#u2">Unidad II</a></li>
+    <li><a href="#cultura">Cultura</a></li>
+    <li><a href="#estetica">Estética</a></li>
+    <li><a href="#imagen">Imagen</a></li>
+    <li><a href="#mito">Mito y rito</a></li>
+    <li><a href="#lenguajes">Lenguajes</a></li>
+    <li><a href="#presentacion">Presentación</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+  <div class="unit-divider reveal" id="u1">
+    <div class="unit">
+      <div class="unit-label">Unidad I</div>
+      <div class="unit-sub">Cultura, arte, estética y percepción</div>
+    </div>
+    <span class="ln"></span>
+  </div>
+
+  <section id="cultura">
+    <div class="sec-head reveal">
+      <span class="sec-num">01</span>
+      <h2>Cultura y disciplinas que la estudian</h2>
+      <span class="sec-line"></span>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Definiciones</span>
+      <h3>¿Qué es la cultura?</h3>
+      <p>Los conocimientos, valores, costumbres, creencias y formas de vivir que una sociedad comparte a lo largo del tiempo. Se manifiesta en la familia, la escuela y la ciudad, moldeando cómo percibimos y nos expresamos.</p>
+      <ul>
+        <li><strong>Antropología</strong> — estudia al ser humano en su totalidad y sus culturas.</li>
+        <li><strong>Sociología</strong> — la estructura y el cambio de las sociedades.</li>
+        <li><strong>Psicología</strong> — el comportamiento y los procesos mentales.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="arte">
+    <div class="sec-head reveal">
+      <span class="sec-num">02</span>
+      <h2>El arte como expresión</h2>
+      <span class="sec-line"></span>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Reflexión</span>
+      <h3>Creación y comunicación</h3>
+      <p>El arte vive en la intersección entre intención creativa, ejecución técnica y la capacidad de resonar en quien lo percibe. Crea un puente entre la subjetividad del creador y el observador: comunica lo inefable.</p>
+      <p>Su función social es expresar frente a la represión, el trauma o la celebración: refleja la realidad, cohesiona a la comunidad y funciona como resistencia frente a la narrativa dominante.</p>
+    </div>
+  </section>
+
+  <section id="estetica">
+    <div class="sec-head reveal">
+      <span class="sec-num">03</span>
+      <h2>Estética y sus categorías</h2>
+      <span class="sec-line"></span>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Experiencia estética</span>
+      <h3>Las categorías de lo estético</h3>
+      <p>La experiencia estética es un estado de contemplación donde los sentidos se abren a la forma. El proceso artístico tiene tres momentos: contexto, creador y disfrute.</p>
+      <ul>
+        <li><strong>Bello</strong> — armónico, proporcionado, placer contemplativo.</li>
+        <li><strong>Sublime</strong> — lo que nos excede y abruma.</li>
+        <li><strong>Feo</strong> — disonancia y asimetría deliberadas.</li>
+        <li><strong>Trágico</strong> — colisión de fuerzas, catarsis.</li>
+        <li><strong>Cómico / grotesco</strong> — subvierte expectativas, incomodidad productiva.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="percepcion">
+    <div class="sec-head reveal">
+      <span class="sec-num">04</span>
+      <h2>Percepción y fenómeno artístico</h2>
+      <span class="sec-line"></span>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Percepción</span>
+      <h3>Ver es un acto aprendido</h3>
+      <p>Percibir no es recibir pasivamente: es construir significado. Cada disciplina lo entiende distinto —para la antropología depende de la cultura; para la sociología, de la clase y el acceso; para la neurociencia, es predicción del cerebro.</p>
+      <blockquote>La belleza y la fealdad dependen del sistema de valores del grupo; lo feo puede ser resistencia.</blockquote>
+      <p>En el fenómeno artístico chocan intención, materia, forma, contexto y encuentro. La obra nunca se cierra del todo: hay un excedente que emerge cuando llega el espectador.</p>
+    </div>
+  </section>
+
+  <div class="unit-divider reveal" id="u2">
+    <div class="unit">
+      <div class="unit-label">Unidad II</div>
+      <div class="unit-sub">Interpretación: imagen, relato y lenguajes del arte</div>
+    </div>
+    <span class="ln"></span>
+  </div>
+
+  <section id="sistema">
+    <div class="sec-head reveal">
+      <span class="sec-num">05</span>
+      <h2>Sistema de interpretación del arte</h2>
+      <span class="sec-line"></span>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Artes escénicas</span>
+      <h3>El cuerpo, el tiempo y el espectador</h3>
+      <p>Las artes escénicas usan el cuerpo como medio y ocurren en tiempo real, irreversible y efímero. Comparten corporalidad, temporalidad, espacio semiótico y un sistema de signos.</p>
+      <ul>
+        <li><strong>Mimesis</strong> — la realidad vista de nuevo, extrañada.</li>
+        <li><strong>Verosimilitud</strong> — fidelidad a las propias reglas, no a la realidad externa.</li>
+        <li><strong>Espectador</strong> — co-creador que completa el circuito del significado.</li>
+      </ul>
+      <a class="btn" href="#" data-notion>Ver en Notion <span>&rarr;</span></a>
+    </div>
+  </section>
+
+  <section id="imagen">
+    <div class="sec-head reveal">
+      <span class="sec-num">06</span>
+      <h2>Análisis e interpretación de la imagen</h2>
+      <span class="sec-line"></span>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Semiótica</span>
+      <h3>Signo, ícono, índice y símbolo</h3>
+      <p>Leer una imagen es un acto cultural, no natural. A partir de Saussure y Peirce, el trabajo distingue los tipos de signo y por qué su sentido cambia según la época y el lugar.</p>
+      <ul>
+        <li><strong>Ícono</strong> — se parece a lo que representa.</li>
+        <li><strong>Índice</strong> — huella o efecto de algo (el humo y el fuego).</li>
+        <li><strong>Símbolo</strong> — acuerdo cultural (la paloma y la paz).</li>
+      </ul>
+      <p>Incluye arquetipo, estereotipo y cliché: de lo universal (Jung) a lo gastado por el uso.</p>
+      <a class="btn" href="#" data-notion>Ver en Notion <span>&rarr;</span></a>
+    </div>
+  </section>
+
+  <section id="mito">
+    <div class="sec-head reveal">
+      <span class="sec-num">07</span>
+      <h2>Mito, leyenda y rito</h2>
+      <span class="sec-line"></span>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Cultura y folclor</span>
+      <h3>Tres formas de creer y contar</h3>
+      <p>El mito <em>se cree</em>, la leyenda <em>se cuenta</em> y el rito <em>se hace</em>. Cada uno da identidad, transmite valores y ordena el tiempo de una comunidad.</p>
+      <blockquote>El arte más potente nace de la tensión entre lo apolíneo (orden) y lo dionisíaco (desborde). — Nietzsche</blockquote>
+      <ul>
+        <li><strong>Mito</strong> — El Quinto Sol (mexica).</li>
+        <li><strong>Leyenda</strong> — El Nahual de Tlaxcala.</li>
+        <li><strong>Rito</strong> — Día de Muertos.</li>
+      </ul>
+      <a class="btn" href="#" data-notion>Ver en Notion <span>&rarr;</span></a>
+    </div>
+  </section>
+
+  <section id="lenguajes">
+    <div class="sec-head reveal">
+      <span class="sec-num">08</span>
+      <h2>Lenguajes y disciplinas del arte</h2>
+      <span class="sec-line"></span>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Formas y géneros</span>
+      <h3>El mapa de las artes</h3>
+      <p>Cada disciplina tiene su propio lenguaje: un paso, un acorde, un plano. El público aprende a leer esos signos.</p>
+      <ul>
+        <li><strong>Danza</strong> — autóctona, folklórica, popular, clásica, contemporánea.</li>
+        <li><strong>Música</strong> — estilos (renacentista → contemporáneo) y formas (binaria, ternaria, rondó).</li>
+        <li><strong>Literatura</strong> — novela, cuento, ensayo, poesía, crónica.</li>
+        <li><strong>Teatro y cine</strong> — del drama solemne a la farsa; géneros que crean un pacto con el espectador.</li>
+        <li><strong>Artes visuales</strong> — de la pintura al performance y la instalación.</li>
+      </ul>
+      <a class="btn" href="#" data-notion>Ver en Notion <span>&rarr;</span></a>
+    </div>
+  </section>
+
+  <div class="unit-divider reveal" id="presentacion">
+    <div class="unit">
+      <div class="unit-label gold">Presentación</div>
+      <div class="unit-sub">Apreciación del arte · exposición libre</div>
+    </div>
+    <span class="ln"></span>
+  </div>
+
+  <section id="tango">
+    <div class="sec-head reveal">
+      <span class="sec-num">★</span>
+      <h2>Las Vegas Tango</h2>
+      <span class="sec-line"></span>
+    </div>
+    <div class="feature reveal">
+      <span class="tag">10 de febrero · tema libre</span>
+      <h3>Las Vegas Tango</h3>
+      <div class="feature-sub">Gil Evans — entre el tango, el impresionismo y la vanguardia del jazz</div>
+      <div class="gold-line"></div>
+      <p>Presentación sobre una pieza elegida libremente: hablar de lo que a uno le gusta. "Las Vegas Tango" toma el pulso del tango y lo sumerge en un tratamiento orquestal denso, donde la orquesta no acompaña: <em>es</em> el solista.</p>
+      <div class="pills">
+        <span class="pill">Cool Jazz</span>
+        <span class="pill">Jazz orquestal</span>
+        <span class="pill">Third Stream</span>
+      </div>
+      <a class="btn-gold" href="las_vegas_tango.html" target="_blank">Abrir presentación <span>&rarr;</span></a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="sig">Arte &amp; Cultura</div>
+  <div>Portafolio · Unidades I &amp; II · 2026</div>
+</footer>
+
+<script>
+  const els=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('in'), i*55);
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.12});
+  els.forEach(el=>io.observe(el));
+
+  document.querySelectorAll('header .reveal').forEach((el,i)=>{
+    setTimeout(()=>el.classList.add('in'), 120 + i*120);
+  });
+
+  document.querySelectorAll('[data-notion]').forEach(a=>{
+    a.addEventListener('click',ev=>{
+      if(a.getAttribute('href')==='#'){
+        ev.preventDefault();
+        alert('Pega aquí el enlace público de tu página de Notion (Share -> Publish) en el atributo href de este botón.');
+      }
+    });
+  });
+</script>
+</body>
+</html>

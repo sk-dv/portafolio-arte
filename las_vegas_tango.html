@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las Vegas Tango — Jazz Orquestal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --midnight: #1A1A2E;
+    --deep-blue: #16213E;
+    --accent-gold: #C9A84C;
+    --muted-text: #A0A0B0;
+    --soft-white: #E8E6E1;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0F0F1A;
+    font-family: 'Inter', sans-serif;
+    color: var(--soft-white);
+    overflow-x: hidden;
+  }
+
+  .slide {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8vh 10vw;
+    position: relative;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+  }
+
+  .slide-title { background: var(--midnight); }
+  .slide-title .overline {
+    font-weight: 500; font-size: 0.75rem; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--accent-gold); margin-bottom: 2rem;
+  }
+  .slide-title h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 700; line-height: 1.1;
+  }
+  .slide-title h1 em { color: var(--accent-gold); font-style: italic; }
+  .slide-title .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2vw, 1.4rem); color: var(--muted-text);
+    margin-top: 1rem; font-style: italic;
+  }
+  .slide-title .meta {
+    margin-top: 3rem; font-size: 0.8rem; color: var(--muted-text); letter-spacing: 1px;
+  }
+
+  .slide-content { background: var(--deep-blue); }
+  .slide-content.alt { background: var(--midnight); }
+
+  .slide-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; margin-bottom: 0.3rem;
+  }
+  .accent-line { width: 50px; height: 2px; background: var(--accent-gold); margin-bottom: 2rem; }
+
+  .slide-content p {
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem); line-height: 1.8;
+    max-width: 720px; font-weight: 300;
+  }
+  .slide-content p + p { margin-top: 1rem; }
+  .highlight { color: var(--accent-gold); font-weight: 500; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 1.5rem; }
+  .two-col .col h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    color: var(--accent-gold); margin-bottom: 0.8rem; font-style: italic;
+  }
+  .two-col .col p { font-size: 0.95rem; line-height: 1.75; font-weight: 300; }
+
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.5rem; margin-top: 1.5rem; }
+  .three-col .col { padding: 1.5rem; border: 1px solid rgba(201,168,76,0.12); }
+  .three-col .col h3 {
+    font-family: 'Playfair Display', serif; font-size: 1rem;
+    color: var(--accent-gold); margin-bottom: 0.6rem; font-style: italic;
+  }
+  .three-col .col p { font-size: 0.88rem; line-height: 1.7; font-weight: 300; }
+
+  .elegant-list { list-style: none; margin-top: 1.5rem; max-width: 720px; }
+  .elegant-list li {
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem); line-height: 1.7; font-weight: 300;
+    padding: 0.6rem 0; border-bottom: 1px solid rgba(201,168,76,0.1);
+    display: flex; align-items: baseline; gap: 0.8rem;
+  }
+  .elegant-list li::before { content: '—'; color: var(--accent-gold); font-weight: 500; flex-shrink: 0; }
+
+  .musician-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; margin-top: 1.5rem; max-width: 760px; }
+  .musician { padding: 0.7rem 0; border-bottom: 1px solid rgba(201,168,76,0.08); }
+  .musician .name { font-weight: 500; font-size: 0.95rem; }
+  .musician .instrument { color: var(--accent-gold); font-size: 0.8rem; font-style: italic; margin-top: 0.15rem; }
+
+  .disc-list { margin-top: 1.5rem; max-width: 720px; }
+  .disc-item {
+    display: grid; grid-template-columns: 55px 1fr; gap: 1.5rem;
+    padding: 0.9rem 0; border-bottom: 1px solid rgba(201,168,76,0.08); align-items: baseline;
+  }
+  .disc-item .year {
+    font-family: 'Playfair Display', serif; font-size: 0.95rem;
+    color: var(--accent-gold); font-weight: 700; text-align: right;
+  }
+  .disc-item .info { font-size: 0.95rem; line-height: 1.6; font-weight: 300; }
+  .disc-item .info em { color: var(--muted-text); }
+
+  .slide-quote { background: var(--midnight); text-align: center; padding: 12vh 12vw; }
+  .slide-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 2.8vw, 2rem); font-style: italic;
+    line-height: 1.6; max-width: 700px; margin: 0 auto;
+  }
+  .slide-quote .attribution {
+    margin-top: 1.5rem; font-size: 0.85rem;
+    color: var(--accent-gold); letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  .slide-close { background: var(--midnight); text-align: center; }
+  .slide-close h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem; }
+  .slide-close .close-sub { font-size: 0.9rem; color: var(--muted-text); font-style: italic; font-family: 'Playfair Display', serif; }
+  .slide-close .meta { margin-top: 3rem; font-size: 0.75rem; color: var(--muted-text); letter-spacing: 1px; }
+
+  .slide-num { position: absolute; bottom: 2rem; right: 3rem; font-size: 0.7rem; color: rgba(201,168,76,0.3); letter-spacing: 2px; }
+
+  .nav-indicator { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.6rem; z-index: 100; }
+  .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(201,168,76,0.25); transition: all 0.3s; cursor: pointer; }
+  .nav-dot.active { background: var(--accent-gold); transform: scale(1.4); }
+
+  @media (max-width: 768px) {
+    .slide { padding: 6vh 6vw; }
+    .two-col, .musician-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .three-col { grid-template-columns: 1fr; gap: 1.5rem; }
+    .nav-indicator { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav-indicator" id="navDots"></div>
+
+<!-- 1: TÍTULO -->
+<div class="slide slide-title" data-slide="1">
+  <div class="overline">Jazz Orquestal · Cool Jazz · Third Stream</div>
+  <h1><em>Las Vegas Tango</em></h1>
+  <div class="subtitle">Una pieza entre el tango, el impresionismo y la vanguardia del jazz</div>
+  <div class="meta">Apreciación del Arte · EIA 4 · INBAL · Febrero 2026</div>
+  <div class="slide-num">01 / 10</div>
+</div>
+
+<!-- 2: LA PIEZA -->
+<div class="slide slide-content" data-slide="2">
+  <h2>La pieza</h2>
+  <div class="accent-line"></div>
+  <p>"Las Vegas Tango" es una composición original de <span class="highlight">Gil Evans</span> incluida en el álbum <em>The Individualism of Gil Evans</em> (1964, Verve Records). La pieza toma la forma rítmica del tango y la sumerge en un tratamiento orquestal denso: los metales se mueven en bloques lentos, las maderas trazan líneas cromáticas y el ritmo oscila entre la tensión del tango y la libertad del jazz.</p>
+  <p>El resultado es una obra que suena <span class="highlight">cinematográfica y abstracta al mismo tiempo</span> — reconocible como tango en su pulso, pero completamente transformada en su lenguaje armónico y tímbrico.</p>
+  <div class="slide-num">02 / 10</div>
+</div>
+
+<!-- 3: EL ÁLBUM -->
+<div class="slide slide-content alt" data-slide="3">
+  <h2>The Individualism of Gil Evans (1964)</h2>
+  <div class="accent-line"></div>
+  <p>Grabado entre 1963 y 1964 para Verve, este álbum es la declaración más personal de Evans como líder. A diferencia de sus colaboraciones célebres con Miles Davis, aquí presenta su visión propia: arreglos orquestales que funcionan como composiciones en sí mismas.</p>
+  <p>El disco incluye tanto originales como reinterpretaciones. Junto a "Las Vegas Tango" aparecen versiones de <span class="highlight">Kurt Weill</span> ("The Barbara Song"), <span class="highlight">Bob Brookmeyer</span> y standards reimaginados con una densidad armónica que anticipa el jazz de vanguardia.</p>
+  <div class="slide-num">03 / 10</div>
+</div>
+
+<!-- 4: MÚSICOS -->
+<div class="slide slide-content" data-slide="4">
+  <h2>Músicos del álbum</h2>
+  <div class="accent-line"></div>
+  <p>Evans reunió un ensamble que mezcla instrumentos del jazz con tímbricas de la orquesta sinfónica:</p>
+  <div class="musician-grid">
+    <div class="musician"><div class="name">Gil Evans</div><div class="instrument">Piano, arreglos y dirección</div></div>
+    <div class="musician"><div class="name">Johnny Coles</div><div class="instrument">Trompeta</div></div>
+    <div class="musician"><div class="name">Phil Woods</div><div class="instrument">Saxofón alto</div></div>
+    <div class="musician"><div class="name">Wayne Shorter</div><div class="instrument">Saxofón tenor</div></div>
+    <div class="musician"><div class="name">Eric Dolphy</div><div class="instrument">Flauta, saxo alto</div></div>
+    <div class="musician"><div class="name">Kenny Burrell</div><div class="instrument">Guitarra</div></div>
+    <div class="musician"><div class="name">Ron Carter</div><div class="instrument">Contrabajo</div></div>
+    <div class="musician"><div class="name">Elvin Jones</div><div class="instrument">Batería</div></div>
+    <div class="musician"><div class="name">Bob Brookmeyer</div><div class="instrument">Trombón de válvulas</div></div>
+    <div class="musician"><div class="name">Gary Peacock</div><div class="instrument">Contrabajo</div></div>
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.9rem; color:var(--muted-text);">Varios de estos músicos — Shorter, Dolphy, Carter, Jones — estaban simultáneamente definiendo el futuro del jazz en otros proyectos fundamentales.</p>
+  <div class="slide-num">04 / 10</div>
+</div>
+
+<!-- 5: LA CORRIENTE -->
+<div class="slide slide-content alt" data-slide="5">
+  <h2>¿A qué corriente pertenece?</h2>
+  <div class="accent-line"></div>
+  <p>"Las Vegas Tango" se sitúa en la intersección de tres corrientes que convergieron entre los años 50 y 60:</p>
+  <div class="three-col">
+    <div class="col">
+      <h3>Cool Jazz</h3>
+      <p>Respuesta al bebop nacida a finales de los 40. Temperamento contenido, arreglos cuidados, tímbricas suaves. Evans fue uno de sus arquitectos desde las sesiones de <em>Birth of the Cool</em> (1949).</p>
+    </div>
+    <div class="col">
+      <h3>Jazz Modal-Orquestal</h3>
+      <p>Escalas modales en lugar de progresiones de acordes tradicionales. La orquesta no acompaña: es el instrumento principal. La armonía se mueve por colores, no por funciones tonales.</p>
+    </div>
+    <div class="col">
+      <h3>Third Stream</h3>
+      <p>Término acuñado por Gunther Schuller (1957) para la fusión consciente de jazz con música clásica contemporánea. Evans toma de Ravel, Debussy y De Falla sin abandonar el swing.</p>
+    </div>
+  </div>
+  <div class="slide-num">05 / 10</div>
+</div>
+
+<!-- 6: RASGOS SONOROS -->
+<div class="slide slide-content" data-slide="6">
+  <h2>Rasgos sonoros de la corriente</h2>
+  <div class="accent-line"></div>
+  <ul class="elegant-list">
+    <li><span class="highlight">Paleta tímbrica expandida</span> — tuba, corno francés, oboe y flauta conviven con la sección rítmica de jazz</li>
+    <li><span class="highlight">Armonía impresionista</span> — acordes extendidos, voicings abiertos y movimiento cromático inspirado en Ravel y Debussy</li>
+    <li><span class="highlight">Texturas como estructura</span> — los arreglos no decoran la melodía, son la composición misma</li>
+    <li><span class="highlight">Ritmo flexible</span> — el pulso se sugiere más que se impone, creando suspensión temporal</li>
+    <li><span class="highlight">Fusión de formas</span> — tango, música española, blues y música de cámara coexisten sin jerarquía</li>
+  </ul>
+  <div class="slide-num">06 / 10</div>
+</div>
+
+<!-- 7: OBRAS AFINES -->
+<div class="slide slide-content alt" data-slide="7">
+  <h2>Artistas y obras afines</h2>
+  <div class="accent-line"></div>
+  <p>Piezas y discos que comparten corriente estética con "Las Vegas Tango":</p>
+  <div class="disc-list">
+    <div class="disc-item"><div class="year">1957</div><div class="info"><strong>Miles Ahead</strong> — Miles Davis + Gil Evans. <em>Primer gran álbum de jazz orquestal modal.</em></div></div>
+    <div class="disc-item"><div class="year">1960</div><div class="info"><strong>Sketches of Spain</strong> — Miles Davis + Gil Evans. <em>Jazz fusionado con De Falla y Rodrigo.</em></div></div>
+    <div class="disc-item"><div class="year">1957</div><div class="info"><strong>Music for Brass</strong> — Gunther Schuller. <em>Obra fundacional del Third Stream.</em></div></div>
+    <div class="disc-item"><div class="year">1961</div><div class="info"><strong>Abstractions</strong> — Schuller + Ornette Coleman. <em>Third Stream llevado al free jazz.</em></div></div>
+    <div class="disc-item"><div class="year">1962</div><div class="info"><strong>MJQ + Orchestra</strong> — Modern Jazz Quartet. <em>Jazz de cámara con arreglos sinfónicos.</em></div></div>
+    <div class="disc-item"><div class="year">1972</div><div class="info"><strong>Svengali</strong> — Gil Evans Orchestra. <em>Evolución posterior: jazz orquestal con elementos de rock y funk.</em></div></div>
+  </div>
+  <div class="slide-num">07 / 10</div>
+</div>
+
+<!-- 8: POR QUÉ IMPORTA -->
+<div class="slide slide-content" data-slide="8">
+  <h2>¿Por qué escuchar esta pieza hoy?</h2>
+  <div class="accent-line"></div>
+  <div class="two-col">
+    <div class="col">
+      <h3>Como objeto de estudio</h3>
+      <p>"Las Vegas Tango" es un caso ejemplar de cómo una forma popular — el tango — puede recontextualizarse dentro de un lenguaje armónico avanzado sin perder su identidad rítmica. Cada instrumento funciona como un color dentro de una paleta, no como una voz independiente.</p>
+    </div>
+    <div class="col">
+      <h3>Como experiencia auditiva</h3>
+      <p>Los bloques de metales se desplazan como masas de color, las maderas trazan líneas que aparecen y desaparecen, y el ritmo del tango actúa como hilo conductor que le da al oyente un punto de apoyo dentro de la complejidad armónica.</p>
+    </div>
+  </div>
+  <div class="slide-num">08 / 10</div>
+</div>
+
+<!-- 9: CITA -->
+<div class="slide slide-quote" data-slide="9">
+  <blockquote>La orquesta no acompaña al solista.<br>La orquesta es el solista.</blockquote>
+  <div class="attribution">Principio estético del jazz orquestal</div>
+  <div class="slide-num">09 / 10</div>
+</div>
+
+<!-- 10: CIERRE -->
+<div class="slide slide-close" data-slide="10">
+  <h2>Gracias</h2>
+  <div class="close-sub">Las Vegas Tango · The Individualism of Gil Evans · 1964</div>
+  <div class="meta">Apreciación del Arte · EIA 4 · INBAL · Febrero 2026</div>
+  <div class="slide-num">10 / 10</div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const nav = document.getElementById('navDots');
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'nav-dot';
+    d.addEventListener('click', () => slides[i].scrollIntoView({ behavior: 'smooth' }));
+    nav.appendChild(d);
+  });
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = [...slides].indexOf(e.target);
+        document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0.5 }).observe && slides.forEach(s =>
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const idx = [...slides].indexOf(e.target);
+          document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+      });
+    }, { threshold: 0.5 }).observe(s)
+  );
+</script>
+</body>
+</html>
