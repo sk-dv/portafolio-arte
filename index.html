@@ -206,6 +206,16 @@
   .feature .btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(201,168,76,0.3)}
   .feature .btn-gold span{transition:transform .25s}
   .feature .btn-gold:hover span{transform:translateX(3px)}
+  .feature .btn-outline{
+    display:inline-flex;align-items:center;gap:8px;position:relative;
+    font-family:"Fraunces",serif;font-size:0.82rem;letter-spacing:0.05em;
+    text-transform:uppercase;text-decoration:none;
+    color:var(--gold);border:1px solid rgba(201,168,76,0.5);
+    padding:11px 22px;border-radius:2px;
+    transition:border-color .25s,background .25s;
+  }
+  .feature .btn-outline:hover{border-color:var(--gold);background:rgba(201,168,76,0.08)}
+  .feature .btn-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
   .unit-label.gold{color:#C9A84C}
 
   @media(max-width:560px){
@@ -426,7 +436,10 @@
         <span class="pill">Jazz orquestal</span>
         <span class="pill">Third Stream</span>
       </div>
-      <a class="btn-gold" href="las_vegas_tango.html" target="_blank">Abrir presentación <span>&rarr;</span></a>
+      <div class="btn-row">
+        <a class="btn-gold" href="las_vegas_tango.html" target="_blank">Abrir presentación <span>&rarr;</span></a>
+        <a class="btn-outline" href="https://www.youtube.com/watch?v=d2wAsOQyLnU" target="_blank" rel="noopener">Escuchar en YouTube <span>&rarr;</span></a>
+      </div>
     </div>
   </section>
 
